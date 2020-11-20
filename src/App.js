@@ -16,13 +16,12 @@ function App() {
     const hash = getTokenFromUrl();
     window.location.hash = "";
     const _token = hash.access_token;
-
     if (_token) {
       dispatch({
         type: "SET_TOKEN",
         token: _token,
       });
-      spotify.setAccessToken(_token);
+      spotify.setAccessToken(String(_token));
 
       spotify.getMe().then((user) => {
         dispatch({
@@ -30,10 +29,23 @@ function App() {
           user: user,
         });
       });
+
+      spotify.getUserPlaylists().then((playlists) => {
+        dispatch({
+          type: "SET_PLAYLISTS",
+          playlists: playlists,
+        });
+      });
+
+      spotify.getPlaylist("37i9dQZEVXcD2VBWojzOU3").then((response) =>
+        dispatch({
+          type: "SET_DISCOVER_WEEKLY",
+          discover_weekly: response,
+        })
+      );
     }
   }, []);
-  console.log("****", user);
-  console.log("@@@@@", token);
+
   return (
     <div className="App">
       {token ? <Player spotify={spotify} /> : <Login />}

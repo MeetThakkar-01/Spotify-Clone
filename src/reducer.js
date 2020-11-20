@@ -1,10 +1,12 @@
 export const initialState = {
   user: null,
-  playlist: [],
+  playlists: [],
   playing: false,
   item: null,
-  token:
-    "BQDP3c6qd_-ALb6FAOu1nao4BmdpR3e5CcC923qW7Ud97yQOv8TDOr-4xAPnrqJ-KHwC2FEhYpjSZuMwGo3y4Xfj6PkmIndZZ1uUK6Q-sfHApW_WnrD9q-Xi7cnHqoccImgUmHlIg6GqyCASHwEPGC_LhmrdUOs45JzGRFSO2ndcm9UNSccT",
+  discover_weekly: null,
+  // token: null,
+  // token:
+  //   "BQCYDvF0F6pr1BGOnrUMU2lLOKyt4P43OXCbI8NQEDvdllOZpkCBRJfeKAglL8dgeP1jCO0tjROhCCuN_Md4wtsWtb7qpJh8ey6VKszdfsyVDoS778kt1s18iwGj3F4i2W_oGXDztBJr2CBCqTUZ_15BjLAtppwoM6heKhTYC5a_eCNYDj4_",
 };
 
 const reducer = (state, action) => {
@@ -22,6 +24,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         token: action.token,
+      };
+    case "SET_PLAYLISTS":
+      console.log("++++++++++", action.playlists);
+      return {
+        ...state,
+        playlists: action.playlists,
+      };
+    case "SET_DISCOVER_WEEKLY":
+      console.log("**************", action.discover_weekly);
+      return {
+        ...state,
+        discover_weekly: action.discover_weekly,
       };
     default:
       return state;
